@@ -119,7 +119,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
     public function chdir(string $dir): LaravelPhpseclib
     {
         try {
-            if ($this->sftp->chdir($dir)){
+            if ($this->sftp->chdir($dir)) {
                 return $this;
             } else {
                 throw new CoreException();
@@ -168,7 +168,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function rawList(string $dir = '.', bool $recursive = false): mixed
     {
-        return $this->sftp->rawlist($dir,$recursive);
+        return $this->sftp->rawlist($dir, $recursive);
     }
 
     /**
@@ -203,9 +203,9 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      * @param int $new_size
      * @return bool
      */
-    public function truncate(string $filename, int $new_size): Bool
+    public function truncate(string $filename, int $new_size): bool
     {
-        return $this->sftp->truncate($filename,$new_size);
+        return $this->sftp->truncate($filename, $new_size);
     }
 
     /**
@@ -238,7 +238,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function chown(string $filename, int $uid, bool $recursive = false): bool
     {
-        return $this->sftp->chown($filename,$uid,$recursive);
+        return $this->sftp->chown($filename, $uid, $recursive);
     }
 
     /**
@@ -252,7 +252,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function chgrp(string $filename, int $gid, bool $recursive = false): bool
     {
-        return $this->sftp->chgrp($filename,$gid,$recursive);
+        return $this->sftp->chgrp($filename, $gid, $recursive);
     }
 
     /**
@@ -270,7 +270,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
     public function chmod(int $mode, string $filename, bool $recursive = false): mixed
     {
         try {
-            return $this->sftp->chmod($mode,$filename,$recursive);
+            return $this->sftp->chmod($mode, $filename, $recursive);
         } catch (UnexpectedValueException $e) {
             throw new CoreException($e->getMessage());
         }
@@ -365,6 +365,30 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
     }
 
     /**
+     * Put multiple file on folder
+     * Array structure:
+     * [
+     *      [
+     *          'remote_file': '', // Opzionale Url remoto di caricamento se diverso da quello in sftp
+     *          'content_file': '', // Contenuto del file se di tipo stringa o binario o di altro tipo
+     *          'path_content_file': '', // Opzionale Eventuale presenza del file in cache così da caricarlo direttamente
+     *          'overwrite': false, // In caso di presenza del file sovrascrivo?
+     *      ]
+     * ]
+     * @param array $items
+     * @return bool
+     */
+    public function putMultipleFile(array $items): bool
+    {
+        $sftp = $this->sftp;
+
+        foreach ($items as $item) {
+
+        }
+
+    }
+
+    /**
      * Downloads a file from the SFTP server.
      * Returns a string containing the contents of $remote_file if $local_file is left undefined or a boolean false if
      * the operation was unsuccessful.  If $local_file is defined, returns true or false depending on the success of the
@@ -378,10 +402,15 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      * @param int $length
      * @param callable|null $progressCallback
      * @return mixed
+     * @throws CoreException
      */
     public function get(string $remote_file, $local_file = false, int $offset = 0, int $length = -1, callable $progressCallback = null): mixed
     {
-        // TODO: Implement get() method.
+        try {
+            return $this->sftp->get($remote_file, $local_file, $offset, $length, $progressCallback);
+        } catch (UnexpectedValueException $e) {
+            throw new CoreException($e->getMessage());
+        }
     }
 
     /**
@@ -390,10 +419,15 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      * @param string $path
      * @param bool $recursive
      * @return bool
+     * @throws CoreException
      */
     public function delete(string $path, bool $recursive = true): bool
     {
-        // TODO: Implement delete() method.
+        try {
+            return $this->sftp->delete($path, $recursive);
+        } catch (UnexpectedValueException $e) {
+            throw new CoreException($e->getMessage());
+        }
     }
 
     /**
@@ -404,7 +438,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function file_exists(string $path): bool
     {
-        // TODO: Implement file_exists() method.
+        return $this->sftp->file_exists($path);
     }
 
     /**
@@ -415,7 +449,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function is_dir(string $path): bool
     {
-        // TODO: Implement is_dir() method.
+        return $this->sftp->is_dir($path);
     }
 
     /**
@@ -426,7 +460,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function is_file(string $path): bool
     {
-        // TODO: Implement is_file() method.
+        return $this->sftp->is_file($path);
     }
 
     /**
@@ -437,7 +471,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function is_link(string $path): bool
     {
-        // TODO: Implement is_link() method.
+        return $this->sftp->is_link($path);
     }
 
     /**
@@ -445,10 +479,15 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      *
      * @param string $path
      * @return bool
+     * @throws CoreException
      */
     public function is_readable(string $path): bool
     {
-        // TODO: Implement is_readable() method.
+        try {
+            return $this->sftp->is_readable($path);
+        } catch (UnexpectedValueException $e) {
+            throw new CoreException($e->getMessage());
+        }
     }
 
     /**
@@ -456,10 +495,15 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      *
      * @param string $path
      * @return bool
+     * @throws CoreException
      */
     public function is_writable(string $path): bool
     {
-        // TODO: Implement is_writable() method.
+        try {
+            return $this->sftp->is_writable($path);
+        } catch (UnexpectedValueException $e) {
+            throw new CoreException($e->getMessage());
+        }
     }
 
     /**
@@ -470,7 +514,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function fileatime(string $path)
     {
-        // TODO: Implement fileatime() method.
+        return $this->sftp->fileatime($path);
     }
 
     /**
@@ -481,7 +525,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function filemtime(string $path)
     {
-        // TODO: Implement filemtime() method.
+        return $this->sftp->filemtime($path);
     }
 
     /**
@@ -492,7 +536,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function fileperms(string $path)
     {
-        // TODO: Implement fileperms() method.
+        return $this->sftp->filemtime($path);
     }
 
     /**
@@ -503,7 +547,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function fileowner(string $path)
     {
-        // TODO: Implement fileowner() method.
+        return $this->sftp->fileowner($path);
     }
 
     /**
@@ -514,7 +558,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function filegroup(string $path)
     {
-        // TODO: Implement filegroup() method.
+        return $this->sftp->filegroup($path);
     }
 
     /**
@@ -525,7 +569,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function filesize(string $path)
     {
-        // TODO: Implement filesize() method.
+        return $this->sftp->filesize($path);
     }
 
     /**
@@ -536,7 +580,7 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      */
     public function filetype(string $path)
     {
-        // TODO: Implement filetype() method.
+        return $this->sftp->filetype($path);
     }
 
     /**
@@ -545,10 +589,15 @@ class LaravelPhpseclib implements LaravelPhpseclibInterface
      * @param string $oldname
      * @param string $newname
      * @return bool
+     * @throws CoreException
      */
     public function rename(string $oldname, string $newname): bool
     {
-        // TODO: Implement rename() method.
+        try {
+            return $this->sftp->rename($oldname, $newname);
+        } catch (UnexpectedValueException $e) {
+            throw new CoreException($e->getMessage());
+        }
     }
 
     /**
