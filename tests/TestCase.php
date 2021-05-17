@@ -1,8 +1,10 @@
 <?php
 
-namespace ILDaviz\LaravelPhpseclib\tests;
+namespace ILDaviz\LaravelPhpseclib\Tests;
 
-class TestCase extends \Orchestra\Testbench\TestCase
+use ILDaviz\LaravelPhpseclib\LaravelPhpseclibServiceProvider;
+
+abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function setUp(): void
     {
@@ -13,6 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
+            LaravelPhpseclibServiceProvider::class
         ];
     }
 
