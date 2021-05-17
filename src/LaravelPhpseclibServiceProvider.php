@@ -20,7 +20,7 @@ class LaravelPhpseclibServiceProvider extends ServiceProvider
     public function register()
     {
         // Register the main class to use with the facade
-        $this->app->singleton('laravel-phpseclib', function () {
+        $this->app->singleton('LaravelPhpseclib', function () {
             return new LaravelPhpseclib;
         });
     }

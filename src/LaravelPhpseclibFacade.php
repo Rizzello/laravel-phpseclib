@@ -16,6 +16,6 @@ class LaravelPhpseclibFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'laravel-phpseclib';
+        return 'LaravelPhpseclib';
     }
 }
