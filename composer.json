@@ -32,7 +32,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ILDaviz\\LaravelPhpseclib\\Tests\\": "./tests/"
+            "ILDaviz\\LaravelPhpseclib\\Tests\\": "tests"
         }
     },
     "scripts": {
