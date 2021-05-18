@@ -4,7 +4,7 @@ namespace ILDaviz\LaravelPhpseclib\Tests;
 
 use ILDaviz\LaravelPhpseclib\LaravelPhpseclibServiceProvider;
 
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+class TestCase extends \Orchestra\Testbench\TestCase
 {
     public function setUp(): void
     {
@@ -21,6 +21,12 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        // perform environment setup
+        $app['config']->set('sftp.connection.testing', [
+            'username' => env('SFTP_USERNAME','username'),
+            'password' => env('SFTP_PASSWORD', 'password'),
+            'hostname' => env('SFTP_HOSTNAME', 'hostname'),
+            'port'     => env('SFTP_PORT', '22')
+
+        ]);
     }
 }

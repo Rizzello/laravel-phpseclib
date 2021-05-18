@@ -19,12 +19,21 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="PhpseclibTest">
-            <directory suffix=".php">./tests/</directory>
+        <testsuite name="Functional">
+            <directory suffix="Test.php">./tests/Functional</directory>
+        </testsuite>
+    </testsuites>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <php>
         <env name="DB_CONNECTION" value="testing"/>
+        <env name="SFTP_USERNAME" value="demo-user"/>
+        <env name="SFTP_PASSWORD" value="demo-user"/>
+        <env name="SFTP_HOSTNAME" value="demo.wftpserver.com"/>
+        <env name="SFTP_PORT" value="2222"/>
         <env name="APP_KEY" value="base64:2fl+Ktvkfl+Fuz4Qp/A75G2RTiWVA/ZoKZvp6fiiM10="/>
     </php>
 </phpunit>

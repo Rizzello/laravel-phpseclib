@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace ILDaviz\LaravelPhpseclib\Exceptions;
 
 use Exception;
 use Throwable;

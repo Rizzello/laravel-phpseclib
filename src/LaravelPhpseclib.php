@@ -2,8 +2,8 @@
 
 namespace ILDaviz\LaravelPhpseclib;
 
-use App\Exceptions\BadLogin;
-use App\Exceptions\CoreException;
+use ILDaviz\LaravelPhpseclib\Exceptions\BadLogin;
+use ILDaviz\LaravelPhpseclib\Exceptions\CoreException;
 use phpseclib3\Net\SFTP;
 use UnexpectedValueException;
 
